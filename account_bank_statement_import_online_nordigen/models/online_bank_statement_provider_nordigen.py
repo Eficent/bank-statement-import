@@ -398,6 +398,8 @@ class OnlineBankStatementProviderNordigen(models.Model):
                     account_number = tr.get("debtorAccount", {}).get("iban")
                 if tr.get("creditorAccount", {}):
                     account_number = tr.get("creditorAccount", {}).get("iban")
+                if not tr.get("remittanceInformationUnstructured", False) and tr.get("remittanceInformationUnstructuredArray", False):
+                    tr.update({"remittanceInformationUnstructured": tr["remittanceInformationUnstructuredArray"][0]})
                 res.append(
                     {
                         "sequence": sequence,
