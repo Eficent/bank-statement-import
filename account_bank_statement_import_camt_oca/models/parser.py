@@ -82,7 +82,7 @@ class CamtParser(models.AbstractModel):
                 "./ns:Ntry/ns:AcctSvcrRef",
             ],
             transaction,
-            "ref",
+            "payment_ref",
         )
         amount = self.parse_amount(ns, node)
         if amount != 0.0:
@@ -158,7 +158,7 @@ class CamtParser(models.AbstractModel):
                 "./ns:NtryDtls/ns:TxDtls/ns:Refs/ns:AcctSvcrRef",
             ],
             transaction,
-            "ref",
+            "payment_ref",
         )
 
         details_nodes = node.xpath("./ns:NtryDtls/ns:TxDtls", namespaces={"ns": ns})
@@ -233,22 +233,24 @@ class CamtParser(models.AbstractModel):
         return result
 
     def _add_line_note(self, transaction):
-        transaction["note"] = _(
-            "Partner Name: %s"
-            "\nPartner Account Number: %s"
-            "\nTransaction Date: %s"
-            "\nReference: %s"
-            "\nCommunication: %s"
+        transaction["narration"] = _(
+            "Partner Name: %(partner_name)s"
+            "\nPartner Account Number: %(account_number)s"
+            "\nTransaction Date: %(date)s"
+            "\nReference: %(payment_ref)s"
+            "\nCommunication: %(name)s"
         ) % (
-            transaction.get("partner_name", "").strip(),
-            transaction.get("account_number", ""),
-            transaction.get("date", ""),
-            transaction.get("ref", "").strip(),
-            transaction.get("name", "").strip(),
+            {
+                "partner_name": transaction.get("partner_name", "").strip(),
+                "account_number": transaction.get("account_number", ""),
+                "date": transaction.get("date", ""),
+                "payment_ref": transaction.get("payment_ref", "").strip(),
+                "name": transaction.get("name", "").strip(),
+            }
         )
         AddtlTxInf = transaction.pop("AddtlTxInf", None)
         if AddtlTxInf:
-            transaction["note"] += (
+            transaction["narration"] += (
                 _("\nAdditional Transaction Information: %s") % AddtlTxInf.strip()
             )
 

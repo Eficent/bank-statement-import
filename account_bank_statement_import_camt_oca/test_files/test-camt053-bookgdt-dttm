@@ -104,9 +104,9 @@
                             </CdtrAgt>
                         </RltdAgts>
                         <RmtInf>
-                            <Ustrd>Insurance policy 857239PERIOD 01.01.2014 - 31.12.2014</Ustrd>
+                            <Ustrd>Insurance policy 857239PERIOD 2014.01.01 - 2014.01.31</Ustrd>
                         </RmtInf>
-                        <AddtlTxInf>MKB Insurance 859239PERIOD 01.01.2014 - 31.12.2014</AddtlTxInf>
+                        <AddtlTxInf>MKB Insurance 859239PERIOD 2014.01.01 - 2014.01.31</AddtlTxInf>
                     </TxDtls>
                 </NtryDtls>
             </Ntry>

@@ -8,7 +8,7 @@
                      'amount': -754.25,
                      'date': '2014-01-05',
                      'name': 'Insurance policy 857239PERIOD 01.01.2014 - 31.12.2014',
-                     'note': 'Partner Name: INSURANCE COMPANY TESTX\n'
+                     'narrator': 'Partner Name: INSURANCE COMPANY TESTX\n'
                              'Partner Account Number: NL46ABNA0499998748\n'
                              'Transaction Date: 2014-01-05\n'
                              'Reference: 435005714488-ABNO33052620\n'
@@ -20,7 +20,7 @@
                      'amount': -564.05,
                      'date': '2014-01-05',
                      'name': 'Direct Debit S14 0410',
-                     'note': 'Partner Name: Test Customer\n'
+                     'narrator': 'Partner Name: Test Customer\n'
                              'Partner Account Number: NL46ABNA0499998748\n'
                              'Transaction Date: 2014-01-05\n'
                              'Reference: TESTBANK/NL/20141229/01206408\n'
@@ -32,7 +32,7 @@
                      'amount': -100.0,
                      'date': '2014-01-05',
                      'name': 'Direct Debit S14 0410',
-                     'note': 'Partner Name: Test Customer\n'
+                     'narrator': 'Partner Name: Test Customer\n'
                              'Partner Account Number: NL46ABNA0499998748\n'
                              'Transaction Date: 2014-01-05\n'
                              'Reference: TESTBANK/NL/20141229/01206407\n'
@@ -44,7 +44,7 @@
                      'amount': 1405.31,
                      'date': '2014-01-05',
                      'name': 'INNDNL2U20140105000217200000708',
-                     'note': 'Partner Name: 3rd party Media\n'
+                     'narrator': 'Partner Name: 3rd party Media\n'
                              'Partner Account Number: NL69ABNA0522123643\n'
                              'Transaction Date: 2014-01-05\n'
                              'Reference: 115\n'
