@@ -1,6 +1,7 @@
 # Copyright 2022 ForgeFlow S.L.
 # Copyright 2023-2024 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+import hashlib
 import json
 from datetime import datetime
 from uuid import uuid4
@@ -367,11 +368,7 @@ class OnlineBankStatementProvider(models.Model):
                     "date": current_date,
                     "ref": partner_name or "/",
                     "payment_ref": payment_ref,
-                    "unique_import_id": (
-                        tr.get("entryReference")
-                        or tr.get("transactionId")
-                        or tr.get("internalTransactionId")
-                    ),
+                    "unique_import_id": self._gocardless_get_unique_import_id(tr),
                     "amount": amount_currency,
                     "account_number": account_number,
                     "partner_name": partner_name,
@@ -380,6 +377,25 @@ class OnlineBankStatementProvider(models.Model):
                 }
             )
         return res, {}
+
+    def _gocardless_prepare_unique_import_id_hasher(self, hasher, tr):
+        """Inherit this method if you need to add more fields
+        to produce a unique identifier for this transaction"""
+        transactionId = tr.get("transactionId", False)
+        entryReference = tr.get("entryReference", False)
+        internalTransactionId = tr.get("internalTransactionId", False)
+        if transactionId:
+            hasher.update(transactionId.encode("utf-8"))
+        if entryReference:
+            hasher.update(entryReference.encode("utf-8"))
+        if internalTransactionId:
+            hasher.update(internalTransactionId.encode("utf-8"))
+        return hasher
+
+    def _gocardless_get_unique_import_id(self, tr):
+        hasher = hashlib.sha1()
+        hasher = self._gocardless_prepare_unique_import_id_hasher(hasher, tr)
+        return hasher.hexdigest()
 
     def _gocardless_get_note(self, tr):
         """Override to get different notes."""
